@@ -3,44 +3,39 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="img/Pancasila.png" type="image/x-icon" />
-    <title>Panca Crush Game</title>
+    <title>Candy Crush</title>
     <style>
       body {
         font-family: Arial, sans-serif;
         background-color: black;
-        margin: 0;
+        margin: auto;
         padding: 0;
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
+        height: auto;
         color: rgb(0, 0, 0);
       }
 
       #game-container {
-        background-color: #7f7c7cb3;
-        border-radius: 50px;
-        padding: 20px;
+        background-color: #7c7878b3;
+        border-radius: auto;
+        padding: auto;
         display: flex;
         flex-direction: column;
         align-items: center;
-        max-width: 90%;
-        margin: 20px;
       }
 
       #game-board {
         display: grid;
-        grid-template-columns: repeat(7, 12%);
+        grid-template-columns: repeat(7, auto);
         gap: 5px;
         position: relative; /* Added for explosion animation */
-        max-width: 90%;
       }
 
       .cell {
-        width: 60px;
-        height: auto;
-        padding-top: 5px; /* Untuk membuat sel menjadi kotak */
+        width: 80px;
+        height: 80px;
         border-radius: 10px;
         cursor: pointer;
         display: flex;
@@ -61,37 +56,35 @@
 
       #title {
         text-align: center;
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+
+      #highscore {
+        margin-top: 20px;
+      }
+
+      #timer {
         font-size: 20px;
-        margin-bottom: 10px;
-        margin-top: 10px;
-      }
-
-      #highscore,
-      #timer {
-        font-size: 16px;
-      }
-
-      #timer {
         margin-top: 10px;
       }
 
       #game-over {
-        font-size: 20px;
+        font-size: 30px;
         color: red;
-        margin-top: 10px;
+        margin-top: 20px;
         display: none;
       }
 
       #reset-button {
-        margin-top: 10px;
-        padding: 8px 16px;
-        font-size: 14px;
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
         background-color: #4caf50;
         color: white;
         border: none;
         border-radius: 8px;
         cursor: pointer;
-        display: none;
       }
 
       #reset-button:hover {
@@ -101,145 +94,28 @@
       /* New styles for explosion animation */
       .explosion {
         position: absolute;
-        width: 80px; /* Adjust the width of the explosion animation */
-        height: 60px; /* Adjust the height of the explosion animation */
+        width: 100px; /* Adjust the width of the explosion animation */
+        height: 100px; /* Adjust the height of the explosion animation */
         background-image: url("img/bom.png"); /* Path to your explosion animation GIF */
         background-size: cover;
         pointer-events: none;
-      }
-
-      /* New styles for music selection */
-      #music-selection {
-        margin-top: 20px;
-      }
-
-      @media screen and (max-width: 400px) {
-        #container {
-          width: 100%;
-          margin: 50% auto;
-          min-height: 800px;
-        }
-      }
-
-      .wrapper {
-        position: fixed;
-      }
-
-      .box div {
-        position: fixed;
-        width: 65px;
-        height: 65px;
-        background-color: transparent;
-        border-radius: 30px;
-        border: 6px solid rgb(255, 255, 255);
-      }
-
-      .box div:nth-child(1) {
-        top: 12%;
-        left: 42%;
-        animation: animate 10s linear infinite;
-      }
-
-      .box div:nth-child(2) {
-        top: 70%;
-        left: 50%;
-        animation: animate 7s linear infinite;
-      }
-
-      .box div:nth-child(3) {
-        top: 17%;
-        left: 6%;
-        animation: animate 9s linear infinite;
-      }
-
-      .box div:nth-child(4) {
-        top: 20%;
-        left: 60%;
-        animation: animate 10s linear infinite;
-      }
-
-      .box div:nth-child(5) {
-        top: 67%;
-        left: 10%;
-        animation: animate 6s linear infinite;
-      }
-
-      .box div:nth-child(6) {
-        top: 80%;
-        left: 70%;
-        animation: animate 12s linear infinite;
-      }
-
-      .box div:nth-child(7) {
-        top: 60%;
-        left: 80%;
-        animation: animate 15s linear infinite;
-      }
-
-      .box div:nth-child(8) {
-        top: 32%;
-        left: 25%;
-        animation: animate 16s linear infinite;
-      }
-
-      .box div:nth-child(9) {
-        top: 90%;
-        left: 25%;
-        animation: animate 9s linear infinite;
-      }
-
-      .box div:nth-child(10) {
-        top: 20%;
-        left: 80%;
-        animation: animate 5s linear infinite;
-      }
-
-      @keyframes animate {
-        0% {
-          transform: scale(0) translateY(0) rotate(0);
-          opacity: 1;
-        }
-
-        100% {
-          transform: scale(1.3) translateY(-90px) rotate(360deg);
-          opacity: 0;
-        }
       }
     </style>
   </head>
   <body>
     <div id="game-container">
-      <h1 id="title">Panca Crush</h1>
+      <h1 id="title">Candy Crush</h1>
       <div id="game-board"></div>
       <div id="highscore">Highscore: <span id="highscore-value">0</span></div>
-      <div id="timer"><span id="timer-value">0:00</span></div>
+      <div id="timer">Time Left: <span id="timer-value">0:00</span></div>
       <div id="game-over">Game Over</div>
-      <button id="reset-button">Reset Game</button>
-      <select id="music-selection">
-        <option value="music/Backsound 1.mp3">Music 1</option>
-        <option value="music/Backsound 2.mp3">Music 2</option>
-        <option value="music/Backsound 3.mp3">Music 3</option>
-        <option value="music/Backsound 4.mp3">Music 4</option>
-        <option value="music/Backsound 5.mp3">Music 5</option>
-        <option value="music/Backsound 6.mp3">Music 6</option>
-        <option value="music/Backsound 7.mp3">Music 7</option>
-        <!-- Add more options for additional music -->
-      </select>
-      <a href="" class="hidden"></a>
-      <div class="wrapper">
-        <div class="box">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      </div>
+      <button id="reset-button" style="display: none">Reset Game</button>
+      <audio autoplay loop>
+        <source
+          src="music/STUMBLE GUYS  MUSIC BATTLE OST.mp3"
+          type="audio/mpeg"
+        />
+      </audio>
     </div>
 
     <script>
@@ -248,19 +124,16 @@
       const timerElement = document.getElementById("timer-value");
       const gameOverElement = document.getElementById("game-over");
       const resetButton = document.getElementById("reset-button");
-      const musicSelection = document.getElementById("music-selection");
 
       let selectedCell = null;
       let score = 0;
       let highscore = 0;
       let matchedCells = [];
-      let gameDuration = 180; // Game duration in seconds
+      let gameDuration = 60; // Game duration in seconds
       let startTime = 0;
       let gameEnded = false;
-      let audio = null;
 
       resetButton.addEventListener("click", resetGame);
-      musicSelection.addEventListener("change", changeMusic);
 
       function createGameBoard() {
         for (let i = 0; i < 5; i++) {
@@ -321,15 +194,15 @@
       function getEmojiByColor(color) {
         switch (color) {
           case "red":
-            return `<img src='img/1.png' width=40px> `;
+            return `<img src='img/1.png' width=50px> `;
           case "blue":
-            return `<img src='img/2.png' width=40px>`;
+            return `<img src='img/2.png' width=50px>`;
           case "green":
-            return `<img src='img/3.png' width=40px>`;
+            return `<img src='img/3.png' width=50px>`;
           case "yellow":
-            return `<img src='img/4.png' width=40px>`;
+            return `<img src='img/4.png' width=50px>`;
           case "purple":
-            return `<img src='img/5.png' width=40px>`;
+            return `<img src='img/5.png' width=50px>`;
         }
       }
 
@@ -359,7 +232,6 @@
         }
 
         if (matched) {
-          playExplosionSound();
           removeMatchedCells(matchedCells);
           updateScore();
           updateHighscore();
@@ -414,10 +286,13 @@
       function removeMatchedCells(matchedCells) {
         matchedCells.forEach((cell) => {
           cell.classList.add("removed");
+          // Memainkan suara ledakan
+          playExplosionSound();
+          // Menampilkan animasi ledakan
           showExplosionAnimation(
             parseInt(cell.dataset.row),
             parseInt(cell.dataset.col)
-          ); // Show explosion animation
+          );
         });
 
         setTimeout(() => {
@@ -425,7 +300,23 @@
             cell.innerHTML = getEmojiByColor(getRandomColor());
             cell.classList.remove("removed");
           });
-        }, 1000); // Delay before resetting cells
+        }, 1000); // Menunda sebelum mereset sel
+      }
+
+      function playExplosionSound() {
+        const explosionSound = new Audio("music/Crush.mp3"); // Adjust path to explosion sound file
+        explosionSound.play();
+      }
+
+      function showExplosionAnimation(row, col) {
+        const explosion = document.createElement("div");
+        explosion.classList.add("explosion");
+        explosion.style.top = row * 80 + "px"; // Adjust position based on cell size
+        explosion.style.left = col * 80 + "px"; // Adjust position based on cell size
+        gameBoard.appendChild(explosion);
+        setTimeout(() => {
+          explosion.remove();
+        }, 1000); // Adjust the duration of the explosion animation
       }
 
       function updateScore() {
@@ -455,49 +346,17 @@
         }
       }
 
-      function showExplosionAnimation(row, col) {
-        const explosion = document.createElement("div");
-        explosion.classList.add("explosion");
-        explosion.style.top = row * 12 + "%"; // Adjust position based on cell size
-        explosion.style.left = col * 12 + "%"; // Adjust position based on cell size
-        gameBoard.appendChild(explosion);
-        setTimeout(() => {
-          explosion.remove();
-        }, 1000); // Adjust the duration of the explosion animation
-      }
-
-      function playExplosionSound() {
-        const explosionSound = new Audio("music/Crush.mp3"); // Path to your explosion sound
-        explosionSound.play();
-      }
-
-      function changeMusic() {
-        if (audio) {
-          audio.pause();
-        }
-        audio = new Audio(musicSelection.value);
-        audio.loop = true;
-        audio.play();
-      }
-
       function startGame() {
         startTime = Date.now();
         createGameBoard();
-        changeMusic();
-        updateTimer(); // Panggil fungsi updateTimer()
         setInterval(updateTimer, 1000);
       }
 
       function endGame() {
-        // Tampilkan pesan "Game Over"
         gameOverElement.style.display = "block";
-        // Tampilkan tombol reset
-        resetButton.style.display = "block";
-        // Hentikan pembaruan timer
+        resetButton.style.display = "block"; // Show reset button
         clearInterval(updateTimer);
-        // Atur gameEnded menjadi true untuk menghentikan gameplay lebih lanjut
-        gameEnded = true;
-        // Lakukan tindakan tambahan di sini, seperti menyembunyikan papan permainan atau menonaktifkan interaksi dengan sel
+        gameEnded = true; // Set gameEnded to true to prevent further gameplay
       }
 
       function resetGame() {
